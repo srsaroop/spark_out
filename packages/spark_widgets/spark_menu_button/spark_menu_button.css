@@ -1,0 +1,71 @@
+/* Copyright (c) 2014, Google Inc. Please see the AUTHORS file for details. */
+/* All rights reserved.  Use of this source code is governed by a BSD-style */
+/* license that can be found in the LICENSE file. */
+
+@import url("../common/spark_widget.css");
+
+:host {
+  display: inline-block;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+}
+
+#overlay {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin-left: 14px;
+  margin-top: 12px;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+[valign=right] #overlay {
+  -webkit-transform: translateX(-90%);
+  transform: translateX(-90%);
+}
+
+[valign=left] #overlay {
+  -webkit-transform: translateX(-10%);
+  transform: translateX(-10%);
+}
+
+.arrow {
+  height: 1px;
+  width: 0;
+  margin: -17px auto 0;
+  border-color: transparent transparent #cfcfcf transparent;
+  border-style: solid;
+  border-width: 8px;
+  cursor: pointer;
+}
+
+.arrow-inner {
+  border-bottom-color: white;
+  margin-top: -15px;
+  top: 1px;
+}
+
+[valign=right] .arrow {
+  position: relative;
+  left: -7px;
+  margin-left: 90%;
+}
+
+[valign=left] .arrow {
+  position: relative;
+  left: -7px;
+  margin-left: 10%;
+}
+
+#overlayMenu {
+  border: none;
+  display: block;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  margin: 5px 0;
+}
+

@@ -1,0 +1,716 @@
+<!DOCTYPE html><!-- Copyright (c) 2013, Google Inc. Please see the AUTHORS file for details.
+     All rights reserved. Use of this source code is governed by a BSD-style
+     license that can be found in the LICENSE file. --><html lang="en"><head><script src="packages/shadow_dom/shadow_dom.debug.js"></script>
+<script src="packages/custom_element/custom-elements.debug.js"></script>
+
+  <meta charset="utf-8">
+  <title>Spark</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="spark_polymer.css">
+
+  
+
+  <!-- template for FileItemCell -->
+  </head><body><polymer-element name="spark-widget" on-focus="{{focus}}">
+
+  
+</polymer-element>
+<polymer-element name="spark-button" extends="spark-widget" attributes="primary active large small noPadding">
+  <template>
+    <!-- BUG: https://code.google.com/p/dart/issues/detail?id=14382 -->
+    <!-- link rel="stylesheet" href="xyz.css" -->
+    <style>
+      @import url("packages/spark_widgets/spark_button/spark_button.css");
+    </style>
+
+    <template if="{{noPadding}}">
+      <style>
+        #button {
+          padding: 0;
+        }
+      </style>
+    </template>
+
+    <button id="button" type="button" focused="" class="{{btnClasses}}">
+      <content></content>
+    </button>
+  </template>
+
+  
+</polymer-element>
+<polymer-element name="spark-icon" extends="spark-widget" attributes="src tooltip size">
+  <template>
+    <!-- BUG: https://code.google.com/p/dart/issues/detail?id=14382 -->
+    <!-- link rel="stylesheet" href="xyz.css" -->
+    <style>
+      @import url("packages/spark_widgets/spark_icon/spark_icon.css");
+    </style>
+
+    <div id="icon" style="background-image:url({{src}}); width:{{size}}px; height:{{size}}px" title="{{tooltip}}">
+    </div>
+  </template>
+
+  
+</polymer-element>
+<polymer-element name="spark-icon-button" extends="spark-widget" attributes="src tooltip active">
+  <template>
+    <!-- BUG: https://code.google.com/p/dart/issues/detail?id=14382 -->
+    <!-- link rel="stylesheet" href="xyz.css" -->
+    <style>
+      @import url("packages/spark_widgets/spark_icon_button/spark_icon_button.css");
+    </style>
+
+    <spark-icon id="icon" src="{{src}}" tooltip="{{tooltip}}"></spark-icon>
+  </template>
+
+  
+</polymer-element>
+<polymer-element name="spark-overlay" extends="spark-widget" attributes="opened autoCloseDisabled" on-webkitanimationstart="{{openedAnimationStart}}" on-animationstart="{{openedAnimationStart}}" on-webkitanimationend="{{openedAnimationEnd}}" on-animationend="{{openedAnimationEnd}}" on-webkittransitionend="{{openedTransitionEnd}}" on-transitionend="{{openedTransitionEnd}}" on-click="{{tapHandler}}" on-keydown="{{keydownHandler}}">
+         <!-- on-tap="{{tapHandler}}" -->
+
+  <template>
+    <!-- BUG: https://code.google.com/p/dart/issues/detail?id=14382 -->
+    <!-- link rel="stylesheet" href="xyz.css" -->
+    <style>
+      @import url("packages/spark_widgets/spark_overlay/spark_overlay.css");
+    </style>
+
+    <content></content>
+  </template>
+
+  
+</polymer-element>
+<polymer-element name="spark-selection" extends="spark-widget" attributes="multi">
+  <template>
+    <!-- BUG: https://code.google.com/p/dart/issues/detail?id=14382 -->
+    <!-- link rel="stylesheet" href="xyz.css" -->
+    <style>
+      @import url("packages/spark_widgets/spark_selection/spark_selection.css");
+    </style>
+  </template>
+
+  
+</polymer-element>
+<polymer-element name="spark-selector" extends="spark-widget" attributes="selected,
+                multi,
+                valueattr,
+                selectedClass,
+                selectedProperty,
+                selectedItem,
+                selectedModel,
+                notap,
+                target,
+                itemsSelector,
+                activateEvent">
+
+  <template>
+    <!-- BUG: https://code.google.com/p/dart/issues/detail?id=14382 -->
+    <!-- link rel="stylesheet" href="xyz.css" -->
+    <style>
+      @import url("packages/spark_widgets/spark_selector/spark_selector.css");
+    </style>
+
+    <spark-selection id="selection" multi="{{multi}}" on-select="{{selectionSelect}}">
+    </spark-selection>
+
+    <content id="items" select="*"></content>
+  </template>
+
+  
+</polymer-element>
+<polymer-element name="spark-menu" extends="spark-selector">
+  <template>
+    <!-- BUG: https://code.google.com/p/dart/issues/detail?id=14382 -->
+    <!-- link rel="stylesheet" href="xyz.css" -->
+    <style>
+      @import url("packages/spark_widgets/spark_menu/spark_menu.css");
+    </style>
+
+    <shadow></shadow>
+  </template>
+
+  
+</polymer-element>
+<polymer-element name="spark-menu-button" extends="spark-widget" attributes="src,
+                selected,
+                valueattr,
+                opened,
+                responsive,
+                valign">
+
+  <template>
+    <!-- BUG: https://code.google.com/p/dart/issues/detail?id=14382 -->
+    <!-- link rel="stylesheet" href="xyz.css" -->
+    <style>
+      @import url("packages/spark_widgets/spark_menu_button/spark_menu_button.css");
+    </style>
+
+    <spark-button id="button" small="" nopadding="" touch-action="none" on-click="{{toggle}}">
+      <img src="{{src}}">
+    </spark-button>
+
+    <div responsive="{{responsive}}" valign="{{valign}}">
+      <spark-overlay id="overlay" class="slideup" opened="{{opened}}" modal="" on-activate="{{toggle}}" on-opened="{{onOpened}}">
+        <div class="arrow"></div>
+        <div class="arrow arrow-inner" on-click="{{toggle}}"></div>
+        <spark-menu id="overlayMenu" selected="{{selected}}" valueattr="{{valueattr}}">
+          <content select="*"></content>
+        </spark-menu>
+      </spark-overlay>
+    </div>
+  </template>
+
+  
+</polymer-element>
+<polymer-element name="spark-menu-item" extends="spark-widget" attributes="src label iconsize">
+  <template>
+    <!-- BUG: https://code.google.com/p/dart/issues/detail?id=14382 -->
+    <!-- link rel="stylesheet" href="xyz.css" -->
+    <style>
+      @import url("packages/spark_widgets/spark_menu_item/spark_menu_item.css");
+    </style>
+
+    <spark-icon src="{{src}}" size="{{iconsize}}"></spark-icon>
+
+    <div class="labelText">
+      <span>{{label}}</span>
+      <content></content>
+    </div>
+  </template>
+
+  
+</polymer-element>
+<polymer-element name="spark-menu-separator" extends="spark-widget">
+  <template>
+    <!-- BUG: https://code.google.com/p/dart/issues/detail?id=14382 -->
+    <!-- link rel="stylesheet" href="xyz.css" -->
+    <style>
+      @import url("packages/spark_widgets/spark_menu_separator/spark_menu_separator.css");
+    </style>
+  </template>
+
+  
+</polymer-element>
+<polymer-element name="spark-modal" extends="spark-overlay" autoclosedisabled="" on-webkitanimationstart="{{openedAnimationStart}}" on-animationstart="{{openedAnimationStart}}" on-webkitanimationend="{{openedAnimationEnd}}" on-animationend="{{openedAnimationEnd}}" on-webkittransitionend="{{openedTransitionEnd}}" on-transitionend="{{openedTransitionEnd}}" on-click="{{tapHandler}}" on-keydown="{{keydownHandler}}">
+  <template>
+    <!-- BUG: https://code.google.com/p/dart/issues/detail?id=14382 -->
+    <!-- link rel="stylesheet" href="xyz.css" -->
+    <style>
+      @import url("packages/spark_widgets/spark_modal/spark_modal.css");
+    </style>
+
+    <shadow></shadow>
+  </template>
+
+  
+</polymer-element>
+<polymer-element name="spark-splitter" extends="spark-widget" attributes="direction size handle locked onUpdate">
+  <template>
+    <!-- BUG: https://code.google.com/p/dart/issues/detail?id=14382 -->
+    <!-- link rel="stylesheet" href="xyz.css" -->
+    <style>
+      @import url("packages/spark_widgets/spark_splitter/spark_splitter.css");
+    </style>
+  </template>
+
+  
+</polymer-element>
+<polymer-element name="spark-split-view" extends="spark-widget" attributes="direction splitterSize splitterHandle locked onUpdate">
+  <template>
+    <!-- BUG: https://code.google.com/p/dart/issues/detail?id=14382 -->
+    <!-- link rel="stylesheet" href="xyz.css" -->
+    <style>
+      @import url("packages/spark_widgets/spark_split_view/spark_split_view.css");
+    </style>
+
+    <!-- HACK: A temporary way to anchor `direction` to something in the
+         shadowRoot to use for conditional styling of <content>. Discussion:
+         https://groups.google.com/forum/#!topic/polymer-dev/NCYrR4OUvDI -->
+    <div id="marker" direction="{{direction}}"></div>
+
+    <!-- NOTE: The Dart side verifies that there is exactly 2 children -->
+    <content select=":nth-child(1)"></content>
+    <spark-splitter id="splitter" direction="{{direction}}" size="{{splitterSize}}" handle="{{splitterHandle}}" locked="{{locked}}" onupdate="{{onUpdate}}">
+    </spark-splitter>
+    <content select=":nth-child(2)"></content>
+  </template>
+
+  
+</polymer-element>
+<polymer-element name="spark-status" extends="spark-widget" attributes="spinning defaultMessage temporaryMessage progressMessage">
+  <template>
+    <!-- BUG: https://code.google.com/p/dart/issues/detail?id=14382 -->
+    <!-- link rel="stylesheet" href="xyz.css" -->
+    <style>
+      @import url("packages/spark_widgets/spark_status/spark_status.css");
+    </style>
+
+    <div class="label"></div>
+    <div class="throbber"></div>
+  </template>
+
+  
+</polymer-element>
+<polymer-element name="spark-suggest-box" extends="spark-widget" attributes="oracle placeholder">
+  <template>
+    <!-- BUG: https://code.google.com/p/dart/issues/detail?id=14382 -->
+    <!-- link rel="stylesheet" href="xyz.css" -->
+    <style>
+      @import url("packages/spark_widgets/spark_suggest/spark_suggest_box.css");
+    </style>
+
+    <input id="text-box" type="search" class="form-control" focused="" placeholder="{{placeholder}}" on-keyup="{{inputKeyUp}}" on-focus="{{inputFocus}}">
+
+    <spark-overlay id="suggestion-list-overlay" class="spark-overlay-scale-slideup">
+      <template repeat="{{s in suggestions | enumerate}}">
+        <!--
+          TODO: Consider reusing existing component, e.g. spark-selection
+        -->
+        <div class="suggestion-item" item-index="{{s.index}}" highlighted="{{s.index == selectionIndex}}" on-mouseover="{{mouseOverItem}}" on-click="{{mouseClickedItem}}">
+          {{s.value.label}}
+          <template if="{{s.value.hasDetails}}">
+            <span class="text-muted">[{{s.value.details}}]</span>
+          </template>
+        </div>
+      </template>
+    </spark-overlay>
+  </template>
+
+  
+</polymer-element>
+<polymer-element name="spark-toolbar" attributes="responsive touch">
+  <template>
+    <!-- BUG: https://code.google.com/p/dart/issues/detail?id=14382 -->
+    <!-- link rel="stylesheet" href="xyz.css" -->
+    <style>
+      @import url("packages/spark_widgets/spark_toolbar/spark_toolbar.css");
+    </style>
+
+    <div class="toolbar" responsive="{{responsive}}" touch-action="{{touchAction}}">
+      <content></content>
+    </div>
+  </template>
+
+  
+</polymer-element>
+<polymer-element name="spark-polymer-ui">
+  <template>
+
+    <!-- BUG: https://code.google.com/p/dart/issues/detail?id=14382 -->
+    <!-- link rel="stylesheet" href="spark_polymer_ui.css"-->
+    <style>
+      @import url("spark_polymer_ui.css");
+    </style>
+
+    <spark-toolbar id="toolbar" lightdom="">
+      <spark-button id="runButton" small="" primary="">
+        <span class="glyphicon glyphicon-play"></span> Run
+      </spark-button>
+      <spark-button id="gitClone" small="">Git Clone...</spark-button>
+      <spark-button id="newProject" small="">New Project...</spark-button>
+
+      <spark-status id="sparkStatus"></spark-status>
+
+      <div id="toolbarRight">
+        <spark-suggest-box id="searchBox" oracle="{{searchOracle}}" placeholder="Search">
+        </spark-suggest-box>
+
+        <spark-menu-button id="mainMenu" src="images/menu.png" responsive="true" selected="0" valueattr="action-id" valign="right" on-activate="{{onMenuSelected}}">
+          <spark-menu-item action-id="file-open" iconsize="0" label="Open File...">
+          </spark-menu-item>
+          <spark-menu-item action-id="folder-open" iconsize="0" label="Open Folder...">
+          </spark-menu-item>
+          <spark-menu-separator></spark-menu-separator>
+          <spark-menu-item action-id="project-new" iconsize="0" label="New Project...">
+          </spark-menu-item>
+          <spark-menu-item action-id="git-clone" iconsize="0" label="Git Clone...">
+          </spark-menu-item>
+          <spark-menu-separator></spark-menu-separator>
+          <spark-menu-item action-id="settings" iconsize="0" label="Settings...">
+          </spark-menu-item>
+          <template if="{{developerMode}}">
+            <spark-menu-separator></spark-menu-separator>
+            <spark-menu-item action-id="run-tests" iconsize="0" label="Run Tests">
+            </spark-menu-item>
+          </template>
+          <spark-menu-separator></spark-menu-separator>
+          <spark-menu-item action-id="help-about" iconsize="0" label="About Spark">
+          </spark-menu-item>
+        </spark-menu-button>
+      </div>
+    </spark-toolbar>
+
+    <spark-split-view id="splitView" direction="left" splittersize="6" splitterhandle="false" onupdate="{{onSplitterUpdate}}">
+      <content></content>
+    </spark-split-view>
+
+    <!-- Delete File dialog -->
+    <spark-modal id="deleteDialog" class="dialog spark-overlay-scale-slideup">
+      <div class="modal-body">
+        <p id="message"></p>
+      </div>
+      <div class="modal-footer">
+        <spark-button overlay-toggle="" data-dismiss="modal">
+          Cancel
+        </spark-button>
+        <spark-button overlay-toggle="" primary="" autofocus="" data-dismiss="modal">
+          Delete
+        </spark-button>
+      </div>
+    </spark-modal>
+
+    <!-- Error dialog -->
+    <spark-modal id="errorDialog" class="dialog spark-overlay-scale-slideup">
+      <div class="modal-body">
+        <div class="form-group">
+          <label id="errorTitle"></label>
+          <div id="errorMessage" class="help-block"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <spark-button id="errorClose" overlay-toggle="" primary="" autofocus="" data-dismiss="modal">
+          Close
+        </spark-button>
+      </div>
+    </spark-modal>
+
+    <!-- Rename File dialog -->
+    <spark-modal id="renameDialog" class="dialog spark-overlay-scale-slideup">
+      <div class="modal-header">
+        <a href="#" class="close" overlay-toggle="">×</a>
+        <h4 class="modal-title">Rename</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="renameFileName">New name</label>
+          <input id="renameFileName" type="text" class="form-control" autofocus="">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <spark-button overlay-toggle="" data-dismiss="modal">
+          Cancel
+        </spark-button>
+        <spark-button overlay-toggle="" primary="" data-dismiss="modal">
+          Rename
+        </spark-button>
+      </div>
+    </spark-modal>
+
+    <!-- New File dialog -->
+    <spark-modal id="fileNewDialog" class="dialog spark-overlay-scale-slideup">
+      <div class="modal-header">
+        <a href="#" class="close" overlay-toggle="">×</a>
+        <h4 class="modal-title">New File</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="fileName">New file name</label>
+          <input id="fileName" type="text" class="form-control" autofocus="">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <spark-button overlay-toggle="" data-dismiss="modal">
+          Cancel
+        </spark-button>
+        <spark-button overlay-toggle="" primary="" data-dismiss="modal">
+          Create
+        </spark-button>
+      </div>
+    </spark-modal>
+
+    <!-- New Folder dialog -->
+    <spark-modal id="folderNewDialog" class="dialog spark-overlay-scale-slideup">
+      <div class="modal-header">
+        <a href="#" class="close" overlay-toggle="">×</a>
+        <h4 class="modal-title">New Folder</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="folderName">New folder name</label>
+          <input id="folderName" type="text" class="form-control" autofocus="">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <spark-button overlay-toggle="" data-dismiss="modal">
+          Cancel
+        </spark-button>
+        <spark-button overlay-toggle="" primary="" data-dismiss="modal">
+          Create
+        </spark-button>
+      </div>
+    </spark-modal>
+
+    <!-- New Project dialog -->
+    <spark-modal id="newProjectDialog" class="dialog spark-overlay-scale-slideup">
+      <div class="modal-header">
+        <a href="#" class="close" overlay-toggle="">×</a>
+        <h4 class="modal-title">New Project</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="name">Project name</label>
+          <input id="name" type="text" class="form-control" autofocus="">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <spark-button overlay-toggle="" data-dismiss="modal">
+          Cancel
+        </spark-button>
+        <spark-button overlay-toggle="" primary="" data-dismiss="modal">
+          Create
+        </spark-button>
+      </div>
+    </spark-modal>
+
+    <!-- Git Clone dialog -->
+    <spark-modal id="gitCloneDialog" class="dialog spark-overlay-scale-slideup">
+      <div class="modal-header">
+        <a href="#" class="close" overlay-toggle="">×</a>
+        <h4 class="modal-title">Clone Git Project</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="gitRepoUrl">Repository URL</label>
+          <input id="gitRepoUrl" type="text" class="form-control" placeholder="https://github.com/foo/bar.git" autofocus="">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <spark-button overlay-toggle="" data-dismiss="modal">
+          Cancel
+        </spark-button>
+        <spark-button overlay-toggle="" primary="" data-dismiss="modal">
+          Clone
+        </spark-button>
+      </div>
+    </spark-modal><!-- /.modal -->
+
+    <!-- Git Commit dialog -->
+    <spark-modal id="gitCommitDialog" class="dialog spark-overlay-scale-slideup">
+      <div class="modal-header">
+        <a href="#" class="close" overlay-toggle="">×</a>
+        <h4 class="modal-title">Git Commit</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="commitMessage">Commit message</label>
+          <textarea id="commitMessage" type="text" class="form-control" rows="3" autofocus=""></textarea>
+          <span class="help-block">Enter a brief description of the changes.</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <spark-button overlay-toggle="" data-dismiss="modal">
+          Cancel
+        </spark-button>
+        <spark-button overlay-toggle="" primary="" data-dismiss="modal">
+          Commit
+        </spark-button>
+      </div>
+    </spark-modal><!-- /.modal -->
+
+    <!-- Git Branch dialog -->
+    <spark-modal id="gitBranchDialog" class="dialog spark-overlay-scale-slideup">
+      <div class="modal-header">
+        <a href="#" class="close" overlay-toggle="">×</a>
+        <h4 class="modal-title">Create Branch</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="gitBranchName">New branch name</label>
+          <input id="gitBranchName" type="text" class="form-control" autofocus="">
+          <span class="help-block">Create a new git branch.</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <spark-button overlay-toggle="" data-dismiss="modal">
+          Cancel
+        </spark-button>
+        <spark-button overlay-toggle="" primary="" data-dismiss="modal">
+          Create Branch
+        </spark-button>
+      </div>
+    </spark-modal><!-- /.modal -->
+
+    <!-- Git Checkout dialog -->
+    <spark-modal id="gitCheckoutDialog" class="dialog spark-overlay-scale-slideup">
+      <div class="modal-header">
+        <a href="#" class="close" overlay-toggle="">×</a>
+        <h4 class="modal-title">Git Checkout</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="currentBranchName">Current branch</label>
+          <input id="currentBranchName" type="text" class="form-control" disabled="">
+        </div>
+        <div class="form-group">
+          <label for="gitCheckout">Switch to branch</label>
+          <select id="gitCheckout" class="form-control"></select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <spark-button overlay-toggle="" data-dismiss="modal">
+          Cancel
+        </spark-button>
+        <spark-button overlay-toggle="" primary="" data-dismiss="modal">
+          Checkout
+        </spark-button>
+      </div>
+    </spark-modal><!-- /.modal -->
+
+    <!-- About dialog -->
+    <spark-modal id="aboutDialog" class="dialog spark-overlay-scale-slideup">
+      <div class="modal-header">
+        <a href="#" class="close" overlay-toggle="">×</a>
+        <h4 class="modal-title">Spark</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <span class="help-block">
+            A Chrome Apps based development environment (v<span id="aboutVersion"></span>)
+          </span>
+        </div>
+        <div class="form-group">
+          <div class="checkbox">
+            <label>
+              <input id="analyticsCheck" type="checkbox">
+                Allow Spark to collect anonymous usage statistics
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <spark-button overlay-toggle="" primary="" autofocus="" data-dismiss="modal">
+          Close
+        </spark-button>
+      </div>
+    </spark-modal><!-- /.modal -->
+
+    <!-- Setting dialog -->
+    <spark-modal id="settingsDialog" class="dialog spark-overlay-scale-slideup">
+      <div class="modal-header">
+        <a href="#" class="close" overlay-toggle="">×</a>
+        <h4 class="modal-title">Settings</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <div id="changeTheme">
+            <label class="settings-title">Editor theme</label>
+            <div>
+              <span class="settings-label"></span>
+              <span class="plus-minus-container">
+                <a href="#" id="themeMinus" class="plus-minus-button" on-click="{{onThemeMinus}}">
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a href="#" id="themePlus" class="plus-minus-button" on-click="{{onThemePlus}}">
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div id="changeKeys">
+            <label class="settings-title">Key bindings</label>
+            <div>
+              <span class="settings-label"></span>
+              <span class="plus-minus-container">
+                <a href="#" id="keysMinus" class="plus-minus-button" on-click="{{onKeysMinus}}">
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a href="#" id="keysPlus" class="plus-minus-button" on-click="{{onKeysPlus}}">
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <spark-button overlay-toggle="" primary="" autofocus="" data-dismiss="modal">
+          Close
+        </spark-button>
+      </div>
+    </spark-modal><!-- /.modal -->
+
+  </template>
+
+  
+</polymer-element>
+<template id="fileview-filename-template">
+    <div class="fileview-filename-container">
+      <div class="filename">
+        <span id="fileName" class="nameField"></span>
+        <span id="fileInfo" class="infoField text-muted"></span>
+      </div>
+      <div class="fileStatus"></div>
+      <div class="gitStatus"></div>
+    </div>
+  </template>
+
+  <!-- template for TreeViewCell -->
+  <template id="treeview-cell-template">
+    <div class="treeviewcell">
+      <div class="treeviewcell-content"></div>
+      <div class="treeviewcell-dragoverlay"></div>
+      <div class="treeviewcell-disclosure">▶</div>
+    </div>
+  </template>
+
+  <!-- template for Editor Dialog -->
+  <template id="editor-dialog">
+    <div class="editor-dialog">
+      <div>
+        <div class="editor-dialog-message" style="">
+          <div>Spark can't show the content of files of this type.</div>
+        </div>
+        <div>
+          <spark-button class="view-as-text-button">Edit as text</spark-button>
+        </div>
+      </div>
+      <div class="always-view-as-text-button">
+        <a href="#">Always edit this kind of files as text</a>
+      </div>
+    </div>
+  </template>
+
+  <!-- analytics includes -->
+  <script src="analytics/google-analytics-bundle.js"></script>
+
+  <!-- git includes -->
+  <script src="git/third_party/zlib_inflate.js"></script>
+  <script src="git/third_party/zlib_deflate.js"></script>
+  <script src="git/third_party/diff3.js"></script>
+
+  <!-- ace includes -->
+  <script src="packages/ace/src/js/ace.js"></script>
+  <script src="packages/ace/src/js/ext-language_tools.js"></script>
+
+  <!-- this is necessary for dart:js -->
+  <script src="packages/browser/interop.js"></script>
+
+  <script src="spark_polymer.html_bootstrap.dart.js" defer=""></script>
+
+
+
+  <!-- Top-level UI element. -->
+  <!-- BUG: Polymer's own .polymer-veiled class: doesn't work - it gets removed
+       too soon, and doesn't prevent FOUC at all.
+       TODO(sergeygs): switch to Polymer's way once it's fixed.-->
+  <spark-polymer-ui id="topUi" class="veiled">
+    <div id="fileViewArea"></div>
+    <div id="editorArea"></div>
+  </spark-polymer-ui>
+
+  <!-- A backdrop veil used to make app appear modal when displaying dialogs. -->
+  <div id="modalBackdrop"></div>
+
+  <!-- File context menu -->
+  <div id="file-item-context-menu" class="dropdown">
+    <div class="backdrop"></div>
+    <ul class="dropdown-menu" role="menu">
+    </ul>
+  </div>
+
+
+
+</body></html>

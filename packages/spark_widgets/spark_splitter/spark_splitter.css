@@ -1,0 +1,28 @@
+/* Copyright (c) 2014, Google Inc. Please see the AUTHORS file for details. */
+/* All rights reserved.  Use of this source code is governed by a BSD-style */
+/* license that can be found in the LICENSE file. */
+
+@import url("../common/spark_widget.css");
+
+:host {
+  display: block;
+  border-left: 1px solid #DDD;
+  border-right: 1px solid #DDD;
+  cursor: col-resize;
+  background-color: #F7F7F7;
+}
+
+:host(.horizontal), /*BUG #733*/:host.horizontal {
+  cursor: row-resize;
+}
+
+.vertical-handle {
+  background: url('handle_vert.png') no-repeat center;
+}
+
+.horizontal-handle {
+  background: url('handle_horiz.png') no-repeat center;
+}
+
+:host:hover, :host(.active), /*BUG #733*/:host.active {
+}

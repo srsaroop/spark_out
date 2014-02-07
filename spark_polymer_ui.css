@@ -1,0 +1,103 @@
+/* Copyright (c) 2013, Google Inc. Please see the AUTHORS file for details. */
+/* All rights reserved.  Use of this source code is governed by a BSD-style */
+/* license that can be found in the LICENSE file. */
+
+@import url("packages/spark_widgets/common/spark_widget.css");
+
+@import url("resources/font_awesome/css/font-awesome.min.css");
+
+#searchBox {
+  display: inline-block;
+  width: 250px;
+  position: relative;
+  top: 4px;
+}
+
+#splitView {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 40px;
+}
+
+.dialog {
+  top: 72px;
+  left: 50%;
+  width: 512px;
+  margin-left: -256px;
+  border-radius: 5px;
+}
+
+.dialog input[type="text"] {
+  width: 100%;
+}
+
+.dialog {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  overflow: hidden;
+  background: white;
+  outline: 1px solid rgba(0,0,0,0.2);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+.dialog a.close {
+  width: 21px;
+  height: 21px;
+  text-align: center;
+}
+
+#toolbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+#toolbarRight {
+  position: absolute;
+  right: 0;
+}
+
+#settingsDialog .settings-label {
+  display: inline-block;
+  width: 130px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: #EEE;
+  border: 1px solid #DDD;
+  padding: 2px 5px;
+}
+
+#settingsDialog .plus-minus-container {
+  margin-left: 15px;
+}
+
+#settingsDialog .plus-minus-button {
+  background-color: #3a84c3;
+  border-radius: 5px;
+  color: #fff;
+  display: inline;
+  overflow: hidden;
+  padding: 3px 8px;
+}
+
+#settingsDialog .plus-minus-button:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+#settingsDialog .plus-minus-button:active {
+  background-color: #19197A;
+  color: #fff;
+  text-decoration: none;
+}
+
+#mainMenu {
+  position: relative;
+  top: 3px;
+}

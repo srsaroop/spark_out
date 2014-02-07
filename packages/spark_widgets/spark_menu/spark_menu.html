@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<!-- Copyright (c) 2013, Google Inc. Please see the AUTHORS file for details.
+     All rights reserved. Use of this source code is governed by a BSD-style
+     license that can be found in the LICENSE file. -->
+
+<!--
+/**
+ * See g-menu https://github.com/Polymer/toolkit-ui/tree/master/elements.
+ * spark-menu is a spark-selector styled to look like a menu. Use it
+ * in conjunction with spark-menu-item.
+ *
+ * Example:
+ *
+ *     <spark-menu selected="email">
+ *       <spark-menu-item name="post" src="images/comment.png">Post a Comment</spark-menu-item>
+ *       <spark-menu-item name="share" src="images/hangout.png">Share Link</spark-menu-item>
+ *       <spark-menu-item name="email" src="images/mail.png">Email Link</spark-menu-item>
+ *       <spark-menu-item name="favorite" src="images/favorite.png">Add to Favorites</spark-menu-item>
+ *     </spark-menu>
+ *
+ * @extends spark-selector
+ */
+-->
+
+<link rel="import" href="../../../packages/spark_widgets/spark_selector/spark_selector.html">
+
+<polymer-element name="spark-menu" extends="spark-selector">
+  <template>
+    <!-- BUG: https://code.google.com/p/dart/issues/detail?id=14382 -->
+    <!-- link rel="stylesheet" href="xyz.css" -->
+    <style>
+      @import url("packages/spark_widgets/spark_menu/spark_menu.css");
+    </style>
+
+    <shadow></shadow>
+  </template>
+
+  <script type="application/dart" src="spark_menu.dart"></script>
+</polymer-element>
